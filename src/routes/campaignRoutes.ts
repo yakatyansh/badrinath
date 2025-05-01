@@ -4,15 +4,17 @@ import {
   getCampaigns,
   getCampaignById,
   updateCampaign,
-  deleteCampaign,
+  deleteCampaign
 } from '../controllers/campaignControllers';
+import asyncHandler from '../utils/asyncHandler'; // Import the asyncHandler
 
 const router = express.Router();
 
-router.post('/campaigns', createCampaign);
-router.get('/campaigns', getCampaigns);
-router.get('/campaigns/:id', getCampaignById);
-router.put('/campaigns/:id', updateCampaign);
-router.delete('/campaigns/:id', deleteCampaign);
+// Define routes and wrap controller methods with asyncHandler
+router.post('/campaigns', asyncHandler(createCampaign));
+router.get('/campaigns', asyncHandler(getCampaigns));
+router.get('/campaigns/:id', asyncHandler(getCampaignById));
+router.put('/campaigns/:id', asyncHandler(updateCampaign));
+router.delete('/campaigns/:id', asyncHandler(deleteCampaign));
 
 export default router;
